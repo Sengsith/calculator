@@ -22,8 +22,9 @@ button {
   border: 1px solid red !important;
   width: 30rem;
   height: 5rem;
-  text-align: end;
   vertical-align: center;
   font-size: 4rem;
   padding: 0 1rem;
+  overflow: hidden;
+  direction: rtl;
 }

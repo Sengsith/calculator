@@ -26,3 +26,20 @@ const operate = (operator, x, y) => {
       return divide(x, y);
   }
 };
+
+// Update display and variable holding display value
+const updateDisplay = (currDisplayText, btnText, currDisplayValue) => {
+  if (currDisplayText === "0") currDisplayText = "";
+  display.textContent = currDisplayText + btnText;
+  currDisplayValue = +display.textContent;
+};
+
+const display = document.querySelector(".display");
+const btnsContainer = document.querySelector(".btns-container");
+let currDisplayValue = 0;
+
+btnsContainer.addEventListener("click", (e) => {
+  if (e.target.tagName === "BUTTON") {
+    updateDisplay(display.textContent, e.target.textContent, currDisplayValue);
+  }
+});
