@@ -141,7 +141,9 @@ equalBtn.addEventListener("click", () => {
     return;
   }
 
-  displayValue = operate(operator, operand1, operand2).toString();
+  displayValue = (
+    Math.round(operate(operator, operand1, operand2) * 10000000) / 10000000
+  ).toString();
   updateDisplay(displayValue, display);
   operand1 = +displayValue;
 
@@ -180,7 +182,6 @@ backspaceBtn.addEventListener("click", () => {
 
 // Keyboard
 document.addEventListener("keydown", (e) => {
-  console.log(e.key);
   switch (e.key) {
     case "1":
       document.querySelector("#one").click();
