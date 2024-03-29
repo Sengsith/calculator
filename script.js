@@ -33,8 +33,8 @@ const updateDisplay = (value, displayToChange) => {
 };
 
 const equalBtn = document.querySelector(".equal");
-const numsContainer = document.querySelector(".nums-container");
-const opsContainer = document.querySelector(".ops-container");
+const numBtns = document.querySelectorAll(".number");
+const opsBtns = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector(".clear");
 const decimalBtn = document.querySelector(".decimal");
 const backspaceBtn = document.querySelector(".backspace");
@@ -45,6 +45,7 @@ let operand1 = null;
 let operand2 = null;
 let isStored1 = false;
 let isResultShowing = false;
+const MAX_INPUT_SPACE = 10;
 
 // User clicks on clear button
 // Empties out all variables
@@ -65,13 +66,13 @@ clearBtn.addEventListener("click", () => {
 // clicks another number, concat the string
 // store into operand1 if operand1 is not filled
 // store into operand2 if operand1 is already filled
-numsContainer.addEventListener("click", (e) => {
-  if (e.target.className === "number") {
+numBtns.forEach((number) => {
+  number.addEventListener("click", (e) => {
     let btnText = e.target.textContent;
 
-    if (btnText === "0" && display.textContent === "0") {
-      return;
-    }
+    if (displayValue.length >= MAX_INPUT_SPACE) return;
+
+    if (btnText === "0" && display.textContent === "0") return;
 
     // Concat behavior throughout pressing numbers
     if (!isResultShowing) {
@@ -99,15 +100,15 @@ numsContainer.addEventListener("click", (e) => {
       isStored1 = false;
       isResultShowing = false;
     }
-  }
+  });
 });
 
 // user clicks on operand
 // we definitely have operand1 stored already, change the flag for operand1
 // reset displayValue for when user inputs numbers again but don't update display
 // this is used as a buffer whenever the user hits an operand
-opsContainer.addEventListener("click", (e) => {
-  if (e.target.className === "operator") {
+opsBtns.forEach((op) => {
+  op.addEventListener("click", (e) => {
     let btnText = e.target.textContent;
 
     // User hit operand without hitting number
@@ -121,7 +122,7 @@ opsContainer.addEventListener("click", (e) => {
     isStored1 = true;
     operator = btnText;
     displayValue = "";
-  }
+  });
 });
 
 // User clicks on equal
@@ -144,8 +145,8 @@ equalBtn.addEventListener("click", () => {
   displayValue = (
     Math.round(operate(operator, operand1, operand2) * 10000000) / 10000000
   ).toString();
-  updateDisplay(displayValue, display);
   operand1 = +displayValue;
+  updateDisplay(displayValue, display);
 
   // Change flag so we know if user wants to input another number or continue
   isResultShowing = true;
@@ -171,6 +172,7 @@ backspaceBtn.addEventListener("click", () => {
   if (display.textContent === 0) return;
 
   if (display.textContent.length === 1) {
+    displayValue = "";
     display.textContent = "0";
   }
 
@@ -218,6 +220,7 @@ document.addEventListener("keydown", (e) => {
       break;
     case "Enter":
       document.querySelector(".equal").click();
+      break;
     case "+":
       document.querySelector("#plus").click();
       break;

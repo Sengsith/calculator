@@ -1,3 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+
+:root {
+  --btns-gap: 0.15rem;
+  --btns-padding: 0.5rem;
+  --padding-left: 0.5rem;
+  --padding-right: 0.5rem;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -5,6 +14,7 @@
 }
 
 body {
+  font-family: "Oswald", sans-serif;
   min-width: 100vw;
   min-height: 100vh;
   display: flex;
@@ -15,19 +25,55 @@ body {
 }
 
 button {
+  font-size: 1.5rem;
   padding: 2rem;
+  font-family: "Oswald", sans-serif;
+}
+
+.calculator {
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .display-wrapper {
-  border: 1px solid red !important;
-  width: 30rem;
-  height: 5rem;
+  width: 100%;
   vertical-align: center;
-  font-size: 4rem;
+  font-size: 3rem;
   padding: 0 1rem;
   overflow: hidden;
+  background-color: hsl(0, 0%, 12%);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  color: white;
 }
 
 .display {
   float: right;
+}
+
+.btns-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--btns-gap);
+  padding: var(--btns-padding);
+  background-color: hsl(214, 53%, 42%);
+}
+
+.clear,
+#zero {
+  width: calc(25rem - var(--btns-gap) - var(--padding-left) - var(--padding-right) - 50%);
+  flex: 1 0 auto;
+}
+
+.backspace,
+.operator,
+.number,
+.decimal,
+.equal {
+  width: calc(25rem - var(--btns-gap) - var(--padding-left) - var(--padding-right) - 75%);
+  flex: 0 1 auto;
 }
